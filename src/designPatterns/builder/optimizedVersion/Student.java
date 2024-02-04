@@ -1,0 +1,127 @@
+package designPatterns.builder.optimizedVersion;
+
+public class Student {
+    private int id;
+    private String name;
+    private int age;
+    private double psp;
+    private String universityName;
+    private String batch;
+    private int gradYear;
+    private String phoneNumber;
+
+    private Student (Builder builder)
+    {
+        if (builder.getGradYear() >= 2022)
+        {
+            throw new IllegalArgumentException("Grad Year should be less than 2022");
+        }
+
+        this.id = builder.getId();
+        this.name = builder.getName();
+        this.age = builder.getAge();
+        this.psp  = builder.getPsp();
+        this.batch = builder.getBatch();
+        this.universityName = builder.getUniversityName();
+        this.gradYear = builder.getGradYear();
+        this.phoneNumber = builder.getPhoneNumber();
+    }
+
+    // Builder inner class
+    static class Builder {
+        private int id;
+        private String name;
+        private int age;
+        private double psp;
+        private String universityName;
+        private String batch;
+        private int gradYear;
+        private String phoneNumber;
+    
+        // private Builder() {}
+        // Getters
+        public int getId() {
+            return id;
+        }
+    
+        public String getName() {
+            return name;
+        }
+    
+        public int getAge() {
+            return age;
+        }
+    
+        public String getBatch() {
+            return batch;
+        }
+    
+        public int getGradYear() {
+            return gradYear;
+        }
+    
+        public String getPhoneNumber() {
+            return phoneNumber;
+        }
+    
+        public double getPsp() {
+            return psp;
+        }
+    
+        public String getUniversityName() {
+            return universityName;
+        }
+    
+        //Setters
+        public Builder setAge(int age) {
+            this.age = age;
+            return this;
+        }
+    
+        public Builder setBatch(String batch) {
+            this.batch = batch;
+            return this;
+        }
+    
+        public Builder setGradYear(int gradYear) {
+            this.gradYear = gradYear;
+            return this;
+        }
+    
+        public Builder setId(int id) {
+            this.id = id;
+            return this;
+        }
+    
+        public Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+    
+        public Builder setPhoneNumber(String phoneNumber) {
+            this.phoneNumber = phoneNumber;
+            return this;
+        }
+    
+        public Builder setPsp(double psp) {
+            this.psp = psp;
+            return this;
+        }
+    
+        public Builder setUniversityName(String universityName) {
+            this.universityName = universityName;
+            return this;
+        }
+    
+        // Methods
+        public Student build()
+        {
+            return new Student(this);
+        }
+    }
+
+    public static Builder getBuilder()
+    {
+        return new Builder();
+    }
+}
